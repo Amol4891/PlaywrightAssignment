@@ -1,7 +1,6 @@
-import { Browser, Page, chromium } from '@playwright/test';
-import { test, expect } from 'playwright/test';
+import { chromium, Browser, Page } from 'playwright';
 
-test('Launch browser and create a new page',async ({page} =>) {
+export async function runTest() {
     // Launch browser and create a new page
     const browser: Browser = await chromium.launch();
     const page: Page = await browser.newPage();
@@ -61,6 +60,7 @@ test('Launch browser and create a new page',async ({page} =>) {
 
     // Close the browser
     await browser.close();
-})
+}
 
-
+// Run the test
+runTest().catch(err => console.error(err));
