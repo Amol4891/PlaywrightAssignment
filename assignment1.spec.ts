@@ -1,18 +1,22 @@
-import { chromium, Browser, Page } from 'playwright';
+import { test } from '@playwright/test';
 
-export async function runTest() {
-    // Launch browser and create a new page
-    const browser: Browser = await chromium.launch();
-    const page: Page = await browser.newPage();
+test.beforeEach(async ({ page }) => {
 
-    // Navigate to the website
+      // Navigate to the website
     await page.goto('https://bstackdemo.com/');
+    
+    });
+test.describe('Demo Test', () => {
+
+            test('test examples', async ({ page , browser }) => {
+
+
 
 
     //Verify Headers
     const header1 = await page.locator('#offers').textContent();
     const header2 = await page.locator('#orders').textContent();
-    const header3 = await page.locator('#favourites').textContent()
+    const header3 = await page.locator('#favourites').textContent();
 
     if (header1 === "Offers") {
         console.log("First header is Offers")
@@ -36,8 +40,8 @@ export async function runTest() {
     await page.locator("#signin").click()
 
     // Print placeholder values in username and password fields
-    const usernamePlaceholder = await page.locator('div#username>div>div>div').textContent()
-    const passwordPlaceholder = await page.locator('div#password>div>div>div').textContent()
+    const usernamePlaceholder = await page.locator('div#username>div>div>div').textContent();
+    const passwordPlaceholder = await page.locator('div#password>div>div>div').textContent();
     console.log('Username Placeholder:', usernamePlaceholder);
     console.log('Password Placeholder:', passwordPlaceholder);
 
@@ -50,7 +54,7 @@ export async function runTest() {
     await page.click('#login-btn');
 
     // Verify username
-    const actualUserName = await page.locator('.username').textContent()
+    const actualUserName = await page.locator('.username').textContent();
     if (actualUserName === userName) {
         console.log("Username verified!")
     }
@@ -60,7 +64,12 @@ export async function runTest() {
 
     // Close the browser
     await browser.close();
-}
+  });
 
-// Run the test
-runTest().catch(err => console.error(err));
+
+});
+
+
+
+
+
